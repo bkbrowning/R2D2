@@ -262,7 +262,7 @@ void WavePanels() {
 
   Serial.println("Panel wave starting...");
 
-  // begin opening a panel then move forward in a wave to close them behin the wave peak
+  // begin opening a panel then move forward in a wave to close them behind the wave peak
   for (int i = 0 ; i < NUMBER_OF_SERVOS ; i++) {
     // begin opening the panels
     Servos[i].attach(myServos[i][PIN_NUM]);
@@ -271,13 +271,11 @@ void WavePanels() {
 
     if (i >= 1) {
       // begin closing the trailing panel
-      Servos[i-1].write(myServos[i][CLOSED_POS], myServos[i][CLOSE_SPEED]);
+      Servos[i-1].write(myServos[i-1][CLOSED_POS], myServos[i-1][CLOSE_SPEED]);
     }
   }
 
-  // close the last panels since they aren't in the wave above
-  Servos[NUMBER_OF_SERVOS-2].write(myServos[NUMBER_OF_SERVOS-2][CLOSED_POS], myServos[NUMBER_OF_SERVOS-2][CLOSE_SPEED]);
-  delay(700);
+  // close the last panel since it is not in the wave above
   Servos[NUMBER_OF_SERVOS-1].write(myServos[NUMBER_OF_SERVOS-1][CLOSED_POS], myServos[NUMBER_OF_SERVOS-1][CLOSE_SPEED]);  
   delay(700); // delay to allow movement to finish
 
